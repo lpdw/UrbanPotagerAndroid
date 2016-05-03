@@ -14,6 +14,10 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        String title = getResources().getString(R.string.sign_in);
+        actionBar.setTitle(title);
+
         Button signInButton = (Button) findViewById(R.id.sign_in_button);
         signInButton.setOnClickListener(this);
 

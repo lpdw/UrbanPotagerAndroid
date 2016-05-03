@@ -1,7 +1,6 @@
 package com.lpdw.urbanproject;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -20,6 +19,9 @@ public class NewGardenFragment extends Fragment implements View.OnClickListener 
         TextView newGardenButton = (TextView) fragContainer.findViewById(R.id.new_garden_button);
         newGardenButton.setOnClickListener(this);
 
+        //Toolbar toolbar = (Toolbar) container.findViewById((R.id.toolbar));
+        //toolbar.setTitle("Add a new garden");
+
         return fragContainer;
     }
 
@@ -29,13 +31,12 @@ public class NewGardenFragment extends Fragment implements View.OnClickListener 
 
         switch (v.getId()){
             case R.id.new_garden_button:
-                targetClass = CreateGardenActivity.class;
+                targetClass = CreateGardenFragment.class;
                 break;
         }
 
         if(targetClass != null){
-            Intent intent = new Intent(this.getContext(), targetClass);
-            startActivity(intent);
+            getFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new CreateGardenFragment()).commit();
         }
     }
 }
