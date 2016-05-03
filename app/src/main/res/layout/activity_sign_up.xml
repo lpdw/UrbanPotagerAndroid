@@ -23,7 +23,7 @@
             android:paddingRight="12dp"
             android:paddingTop="17dp"
             android:paddingBottom="17dp"
-            android:id="@+id/sign_in_email"/>
+            android:id="@+id/sign_up_email"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -34,7 +34,18 @@
             android:paddingTop="17dp"
             android:paddingBottom="17dp"
             android:hint="Password"
-            android:id="@+id/sign_in_password"/>
+            android:id="@+id/sign_up_password"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingTop="17dp"
+            android:paddingBottom="17dp"
+            android:hint="Password confirmation"
+            android:id="@+id/sign_up_password_confirmation"/>
 
         <Button
             android:layout_width="match_parent"
@@ -44,15 +55,15 @@
             android:layout_marginBottom="20dp"
             android:textColor="@color/white"
             android:textSize="17sp"
-            android:id="@+id/sign_in_button"
-            android:text="Sign In"/>
+            android:id="@+id/sign_up_button"
+            android:text="Sign Up"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="15sp"
             android:gravity="center"
-            android:text="I don't have an account." />
+            android:text="I have already an account." />
 
         <TextView
             android:layout_width="match_parent"
@@ -60,7 +71,7 @@
             android:textSize="15sp"
             android:textColor="@color/colorPrimary"
             android:gravity="center"
-            android:id="@+id/sign_in_to_sign_up"
-            android:text="Sign Up" />
+            android:id="@+id/sign_up_to_sign_in"
+            android:text="Sign In" />
     </LinearLayout>
 </RelativeLayout>
