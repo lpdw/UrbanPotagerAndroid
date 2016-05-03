@@ -1,8 +1,8 @@
 package com.lpdw.urbanproject;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -13,10 +13,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
-
-        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
-        String title = getResources().getString(R.string.sign_in);
-        actionBar.setTitle(title);
 
         Button signInButton = (Button) findViewById(R.id.sign_in_button);
         signInButton.setOnClickListener(this);
@@ -31,7 +27,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
         switch (v.getId()){
             case R.id.sign_in_button:
-                targetClass = NewGardenActivity.class;
+                targetClass = MainActivity.class;
                 break;
             case R.id.sign_in_to_sign_up:
                 targetClass = SignUpActivity.class;

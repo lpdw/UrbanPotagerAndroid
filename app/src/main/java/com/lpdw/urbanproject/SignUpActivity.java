@@ -16,9 +16,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
-        String title = getResources().getString(R.string.sign_up);
-        actionBar.setTitle(title);
+        //android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        //String title = getResources().getString(R.string.sign_up);
+        //actionBar.setTitle(title);
 
         Button signInButton = (Button) findViewById(R.id.sign_up_button);
         signInButton.setOnClickListener(this);
@@ -34,7 +34,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         switch (v.getId()){
             case R.id.sign_up_button:
-                targetClass = NewGardenActivity.class;
+                targetClass = MainActivity.class;
                 break;
             case R.id.sign_up_to_sign_in:
                 targetClass = SignInActivity.class;
