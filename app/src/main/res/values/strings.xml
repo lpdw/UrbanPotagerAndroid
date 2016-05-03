@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">UrbanProject</string>
+    <string name="SignIn">Sign In</string>
 </resources>
