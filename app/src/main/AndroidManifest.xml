@@ -17,6 +17,7 @@
         </activity>
         <activity android:name=".NewGardenActivity"></activity>
         <activity android:name=".SignUpActivity"></activity>
+        <activity android:name=".CreateGardenActivity"></activity>
     </application>
 
 </manifest>

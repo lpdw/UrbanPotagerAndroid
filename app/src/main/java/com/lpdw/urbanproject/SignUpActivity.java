@@ -7,8 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.ResourceBundle;
-
 /**
  * Created by yassin on 03/05/16.
  */
@@ -19,7 +17,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_sign_up);
 
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
-        String title = getResources().getString(R.string.SignUp);
+        String title = getResources().getString(R.string.sign_up);
         actionBar.setTitle(title);
 
         Button signInButton = (Button) findViewById(R.id.sign_up_button);
