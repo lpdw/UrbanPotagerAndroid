@@ -29,4 +29,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.2.1'
     compile "com.android.support:appcompat-v7:${supportLibVersion}"
     compile "com.android.support:design:${supportLibVersion}"
+    compile 'com.android.support:preference-v7:23.0.1'
+    compile 'com.pavelsikun:material-seekbar-preference:2.3.0+'
 }

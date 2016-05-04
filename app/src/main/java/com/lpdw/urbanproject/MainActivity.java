@@ -1,7 +1,11 @@
 package com.lpdw.urbanproject;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -65,8 +69,14 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_map) {
 
-        } else if (id == R.id.nav_settings) {
+        /*} else if (id == R.id.nav_settings) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new NewGardenFragment()).commit();
 
+        */ }
+        else if (id == R.id.nav_settings) {
+            //getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new SettingsActivity()).commit();
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_garden1) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new GardenFragment()).commit();
         } else if (id == R.id.nav_garden2) {

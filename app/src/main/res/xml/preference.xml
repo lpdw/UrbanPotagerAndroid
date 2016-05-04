@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:sample="http://schemas.android.com/apk/res-auto">>
+    <PreferenceCategory
+        android:key="pref_key_category_1"
+        android:title="PUBLIC/PRIVATE DATA" >
+        <SwitchPreference
+            android:key="pref_sync"
+            android:title="Localisation"
+            android:defaultValue="false" />
+        <SwitchPreference
+            android:key="pref_sync2"
+            android:title="Température de l'eau"
+            android:defaultValue="false" />
+        <SwitchPreference
+            android:key="pref_sync3"
+            android:title="Humidité de l'air"
+            android:defaultValue="false" />
+        <SwitchPreference
+            android:key="pref_sync4"
+            android:title="Niveau d'ensoleillement"
+            android:defaultValue="false" />
+        <SwitchPreference
+            android:key="pref_sync5"
+            android:title="Niveau d'ensoleillement"
+            android:defaultValue="false" />
+        <SwitchPreference
+            android:key="pref_sync6"
+            android:title="Niveau du réservoir"
+            android:defaultValue="false" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="pref_key_category_2"
+        android:title="POTAGER TOOLS" >
+        <com.lpdw.urbanproject.TimePreference
+            android:key="EclairageD_key"
+            android:title="Eclairage Heure debut" />
+        <com.lpdw.urbanproject.TimePreference
+            android:key="EclairageFinal_key"
+            android:title="Eclairage Heure fin" />
+        <com.lpdw.urbanproject.TimePreference
+            android:key="ArrosageD_Key"
+            android:title="Arrosage heure debut" />
+        <com.lpdw.urbanproject.TimePreference
+            android:key="ArrosageFinal_key"
+            android:title="Arrosage heure debut" />
+
+
+        <CheckBoxPreference
+            android:title="Toujours arroser"
+            android:defaultValue="true"
+            android:key="checkboxPref" />
+        <com.pavelsikun.seekbarpreference.SeekBarPreference
+            android:key="seekbar1"
+            android:title="Seuil lumière"
+            android:enabled="true"
+            android:defaultValue="50"
+
+            sample:msbp_minValue="0"
+            sample:msbp_maxValue="100"
+            sample:msbp_interval="5"
+            sample:msbp_measurementUnit="%"
+            sample:msbp_dialogEnabled="false"/>
+
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="pref_key_category_3"
+        android:title="NOTIFICATION ALERT">
+        <com.lpdw.urbanproject.EditTextIntegerPreference
+            android:key="editTemp_Key"
+            android:title="Alert température air basse (-10°c et 20°c )" />
+        <com.lpdw.urbanproject.EditTextIntegerPreference
+            android:key="editTemp_Key2"
+            android:title="Alert température air élevée (0°c et 60°c )"/>
+        <com.lpdw.urbanproject.EditTextIntegerPreference
+            android:key="editEau_Key"
+            android:title="Alert température eau basse (-10°c et 20°c )"/>
+        <com.lpdw.urbanproject.EditTextIntegerPreference
+            android:key="editEau_Key2"
+            android:title="Alert température eau élevée (0°c et 60°c )" />
+        <com.pavelsikun.seekbarpreference.SeekBarPreference
+            android:key="seekbar2"
+            android:title="Humidité élevée"
+            android:enabled="true"
+            android:defaultValue="50"
+
+            sample:msbp_minValue="0"
+            sample:msbp_maxValue="100"
+            sample:msbp_interval="5"
+            sample:msbp_measurementUnit="%"
+            sample:msbp_dialogEnabled="false"/>
+        <com.pavelsikun.seekbarpreference.SeekBarPreference
+            android:key="seekbar3"
+            android:title="Humidité basse"
+            android:enabled="true"
+            android:defaultValue="50"
+
+            sample:msbp_minValue="0"
+            sample:msbp_maxValue="100"
+            sample:msbp_interval="5"
+            sample:msbp_measurementUnit="%"
+            sample:msbp_dialogEnabled="false"/>
+    </PreferenceCategory>
+</PreferenceScreen>
+
