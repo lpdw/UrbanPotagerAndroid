@@ -62,15 +62,15 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_map) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new NewGardenFragment()).commit();
+
         } else if (id == R.id.nav_settings) {
 
         } else if (id == R.id.nav_garden1) {
-
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new GardenFragment()).commit();
         } else if (id == R.id.nav_garden2) {
-
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new GardenFragment()).commit();
         } else if (id == R.id.nav_add_garden) {
-
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new CreateGardenFragment()).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

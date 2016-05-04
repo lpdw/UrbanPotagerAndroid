@@ -14,7 +14,7 @@ import android.widget.TextView;
 public class NewGardenFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View fragContainer = inflater.inflate(R.layout.activity_new_garden, container, false);
+        View fragContainer = inflater.inflate(R.layout.fragment_garden_new, container, false);
 
         TextView newGardenButton = (TextView) fragContainer.findViewById(R.id.new_garden_button);
         newGardenButton.setOnClickListener(this);

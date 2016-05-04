@@ -7,13 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Created by root on 03/05/16.
+ * Created by OBYON on 04/05/16.
  */
-public class CreateGardenFragment extends Fragment{
+public class GardenDashboardFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View fragContainer = inflater.inflate(R.layout.fragment_garden_create, container, false);
-
+        View fragContainer = inflater.inflate(R.layout.fragment_garden_dashboard, container, false);
         return fragContainer;
     }
 }
