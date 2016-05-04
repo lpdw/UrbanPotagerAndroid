@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">UrbanProject</string>
+    <string name="sign_in">S\'identifier</string>
+    <string name="sign_up">S\'inscrire</string>
+    <string name="add_garden">Ajouter un potager</string>
+    <string name="navigation_drawer_open">Ouvrir le menu</string>
+    <string name="navigation_drawer_close">Fermer le menu</string>
+    <string name="menu_myGardens">Mes potagers</string>
+    <string name="menu_map">Ma carte</string>
+    <string name="menu_param">Paramètres</string>
+</resources>
