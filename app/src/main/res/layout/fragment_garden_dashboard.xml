@@ -1,30 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="38dp"
-    android:paddingRight="38dp"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.lpdw.urbanproject.SignInActivity">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/wrap_content"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:orientation="vertical"
+    android:layout_centerHorizontal="true">
 
-    <LinearLayout
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:orientation="vertical"
-        android:layout_marginLeft="60dp"
-        android:layout_marginRight="60dp">
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="20dp"
-            android:textColor="@color/white"
-            android:textSize="17sp"
-            android:id="@+id/new_garden_button"
-            android:text="DASHBOARD"/>
+        android:textAlignment="center"
+        style="@style/wrap_content.text_title"
+        android:text="Dashboard"/>
+    <LinearLayout
+        style="@style/wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_centerHorizontal="true">
+
+        <LinearLayout
+            style="@style/wrap_content.vertical_center">
+            <TextView
+                style="@style/wrap_content.text_round"
+                android:background="@drawable/bg_round_orange"
+                android:id="@+id/tv_tempValue"
+                android:text="60%"/>
+            <TextView
+                style="@style/wrap_content"
+                android:text="Temp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/wrap_content.vertical_center">
+            <TextView
+                style="@style/wrap_content.text_round"
+                android:background="@drawable/bg_round_red"
+                android:id="@+id/tv_humidityValue"
+                android:text="2%"/>
+            <TextView
+                style="@style/wrap_content"
+                android:text="Hum"/>
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/wrap_content.vertical_center">
+            <TextView
+                style="@style/wrap_content.text_round"
+                android:background="@drawable/bg_round_green"
+                android:id="@+id/tv_lightValue"
+                android:text="47%"/>
+            <TextView
+                style="@style/wrap_content"
+                android:text="Light"/>
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/wrap_content.vertical_center">
+            <TextView
+                style="@style/wrap_content.text_round"
+                android:background="@drawable/bg_round_orange"
+                android:id="@+id/tv_airValue"
+                android:paddingLeft="8dp"
+                android:drawableLeft="@drawable/ic_emoticon_happy"/>
+            <TextView
+                style="@style/wrap_content"
+                android:text="Air"/>
+        </LinearLayout>
+
     </LinearLayout>
-</RelativeLayout>
+    <ProgressBar
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop ="20dp"
+        android:progress="50"
+        android:max="100"
+        android:secondaryProgress="80"/>
+
+    <TextView
+        style="@style/wrap_content"
+        android:layout_gravity="center"
+        android:text="Water Level"/>
+    <TextView
+        style="@style/wrap_content.green_bold_text"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:text="75%"/>
+
+    <LinearLayout
+        style="@style/wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            style="@style/wrap_content"
+            android:text="Next watering cycle in: "/>
+        <TextView
+            style="@style/wrap_content.green_bold_text"
+            android:layout_marginLeft="35dp"
+            android:text="10 min"/>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            style="@style/wrap_content"
+            android:text="Additional light: "/>
+        <TextView
+            style="@style/wrap_content.green_bold_text"
+            android:layout_marginLeft="80dp"
+            android:text="ON"/>
+    </LinearLayout>
+</LinearLayout>
