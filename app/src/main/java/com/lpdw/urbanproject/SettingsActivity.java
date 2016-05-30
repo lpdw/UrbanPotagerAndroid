@@ -1,6 +1,10 @@
 package com.lpdw.urbanproject;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.EditTextPreference;
+import android.preference.ListPreference;
+import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
@@ -8,11 +12,15 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+import android.preference.PreferenceGroup;
 
 /**
  * Created by mangubu on 03/05/16.
@@ -33,19 +41,9 @@ public class SettingsActivity extends ActionBarActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-//        public boolean onOptionsItemSelected(MenuItem item) {
-//            switch (item.getItemId()) {
-//                case android.R.id.home:
-//                    // app icon in action bar clicked; goto parent activity.
-//                    this.finish();
-//                    return true;
-//                default:
-//                    return super.onOptionsItemSelected(item);
-//            }
-//        }
     }
 
-    public class ParametersFragment extends PreferenceFragment {
+    public class ParametersFragment extends PreferenceFragment  {
 
         private AppCompatDelegate mDelegate;
 
@@ -55,22 +53,72 @@ public class SettingsActivity extends ActionBarActivity {
             super.onCreate(savedInstanceState);
             getFragmentManager().beginTransaction().replace(android.R.id.content, new MyPreferenceFragment()).commit();
 
-
         }
 
-        public class MyPreferenceFragment extends PreferenceFragment
+        public class MyPreferenceFragment extends PreferenceFragment implements
+                SharedPreferences.OnSharedPreferenceChangeListener
         {
+
             @Override
             public void onCreate(final Bundle savedInstanceState)
             {
                 super.onCreate(savedInstanceState);
                 addPreferencesFromResource(R.xml.preference);
-                PreferenceManager preferenceManager = getPreferenceManager();
-                if (preferenceManager.getSharedPreferences().getBoolean("pref_sync", true)){
-                    // Your switch is on
-                } else {
-                    // Your switch is off
-                }
+                EditText editAirB = ((EditTextIntegerPreference) findPreference("editTemp_Key")).getEditText();
+                editAirB.setFilters(new InputFilter[]{ new InputFilter() {
+                    @Override
+                    public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+                        try {
+                            int input = Integer.parseInt(dest.toString() + source.toString());
+                            if (input<20 && input >-10)
+                                return null;
+                        } catch (NumberFormatException nfe) { }
+                        return "";
+                    }
+                } });
+
+                EditText editAirH = ((EditTextIntegerPreference) findPreference("editTemp_Key2")).getEditText();
+                editAirH.setFilters(new InputFilter[]{ new InputFilter() {
+                    @Override
+                    public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+                        try {
+                            int input = Integer.parseInt(dest.toString() + source.toString());
+                            if (input<60 && input >0)
+                                return null;
+                        } catch (NumberFormatException nfe) { }
+                        return "";
+                    }
+                } });
+
+                EditText editEauB = ((EditTextIntegerPreference) findPreference("editEau_Key")).getEditText();
+                editEauB.setFilters(new InputFilter[]{ new InputFilter() {
+                    @Override
+                    public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+                        try {
+                            int input = Integer.parseInt(dest.toString() + source.toString());
+                            if (input<20 && input >-10)
+                                return null;
+                        } catch (NumberFormatException nfe) { }
+                        return "";
+                    }
+                } });
+
+                EditText editEauE = ((EditTextIntegerPreference) findPreference("editEau_Key2")).getEditText();
+                editEauE.setFilters(new InputFilter[]{ new InputFilter() {
+                    @Override
+                    public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+                        try {
+                            int input = Integer.parseInt(dest.toString() + source.toString());
+                            if (input<60 && input >-0)
+                                return null;
+                        } catch (NumberFormatException nfe) { }
+                        return "";
+                    }
+                } });
+            }
+
+            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
+                                                  String key) {
             }
         }
     }

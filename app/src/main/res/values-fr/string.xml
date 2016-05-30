@@ -8,4 +8,6 @@
     <string name="menu_myGardens">Mes potagers</string>
     <string name="menu_map">Ma carte</string>
     <string name="menu_param">Paramètres</string>
+    <string name="set">Ajouter</string>
+    <string name="cancel">Annuler</string>
 </resources>

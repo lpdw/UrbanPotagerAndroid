@@ -11,17 +11,33 @@ public class EditTextIntegerPreference extends EditTextPreference {
 
     public EditTextIntegerPreference(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        getEditText().setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_SIGNED);
+        getEditText().setInputType(InputType.TYPE_NUMBER_FLAG_SIGNED | InputType.TYPE_CLASS_NUMBER);
     }
 
     public EditTextIntegerPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        getEditText().setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_SIGNED);
+        getEditText().setInputType(InputType.TYPE_NUMBER_FLAG_SIGNED | InputType.TYPE_CLASS_NUMBER);
     }
 
     public EditTextIntegerPreference(Context context) {
         super(context);
-        getEditText().setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_SIGNED);
+        getEditText().setInputType(InputType.TYPE_NUMBER_FLAG_SIGNED | InputType.TYPE_CLASS_NUMBER);
+    }
+
+    @Override
+    protected void onDialogClosed(boolean positiveResult) {
+        super.onDialogClosed(positiveResult);
+
+        setSummary(getSummary());
+    }
+
+    @Override
+    public CharSequence getSummary() {
+        if(this.getText() == null){
+            return " -- °c";
+        }
+        else
+            return this.getText() + " °c";
     }
 
     @Override public void setText(String text) {
