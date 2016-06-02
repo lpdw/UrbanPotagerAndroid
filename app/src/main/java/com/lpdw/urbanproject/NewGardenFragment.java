@@ -27,16 +27,16 @@ public class NewGardenFragment extends Fragment implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
-        Class targetClass = null;
+        Fragment targetFragment = null;
 
         switch (v.getId()){
             case R.id.new_garden_button:
-                targetClass = CreateGardenFragment.class;
+                targetFragment = new CreateGardenFragment();
                 break;
         }
 
-        if(targetClass != null){
-            getFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new CreateGardenFragment()).commit();
+        if(targetFragment != null){
+            getFragmentManager().beginTransaction().replace(R.id.fragmentContainer, targetFragment).commit();
         }
     }
 }

@@ -10,4 +10,6 @@
     <string name="menu_param">Paramètres</string>
     <string name="set">Ajouter</string>
     <string name="cancel">Annuler</string>
+    <string name="next">Suivant</string>
+    <string name="ignore">Ignorer</string>
 </resources>

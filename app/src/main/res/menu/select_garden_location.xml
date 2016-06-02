@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Settings, should always be in the overflow -->
+    <item android:id="@+id/valid_garden_location"
+        android:title="@string/next"
+        app:showAsAction="always"/>
+    <item android:id="@+id/ignore_garden_location"
+        android:title="@string/ignore"
+        app:showAsAction="always"/>
+</menu>

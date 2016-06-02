@@ -9,4 +9,7 @@
     <string name="menu_myGardens">My gardens</string>
     <string name="menu_map">My map</string>
     <string name="menu_param">Parameters</string>
+    <string name="select_garden_location">Select garden location</string>
+    <string name="next">Next</string>
+    <string name="ignore">Ignore</string>
 </resources>

@@ -40,7 +40,7 @@
         android:layout_marginBottom="20dp"
         android:textColor="@color/white"
         android:textSize="17sp"
-        android:id="@+id/create_garden_button"
+        android:id="@+id/create_garden_next"
         android:text="Next"/>
 
 </LinearLayout>
