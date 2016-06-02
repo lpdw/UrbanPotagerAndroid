@@ -19,20 +19,11 @@ public class GardenDashboardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View fragContainer = inflater.inflate(R.layout.fragment_garden_dashboard, container, false);
 
-        SharedPreferences prefs = getActivity().getSharedPreferences("token_file", getActivity().MODE_PRIVATE);
-        String token = prefs.getString("token", "fail");
+        ApiCallSender aps = new ApiCallSender(getActivity());
+        aps.getData("test");
 
-        Log.d("test", "token");
-        Log.d("test", token);
-
-        //API api = ServiceGenerator.createService(API.class, "Bearer " + token);
-        //Call<Data> call = api.getData("test");
-        //try{
-        //    Data data = call.execute().body();
-        //    Log.d("test description", data.description);
-        //} catch (Exception e) {
-        //    Log.d("FAIL", e.getStackTrace().toString());
-        //}
+        //On récupère les données inscrites dans data_file
+        Log.d("TEST", getActivity().getSharedPreferences("data_file", getActivity().MODE_PRIVATE).getString("test", "no data"));
 
         return fragContainer;
     }

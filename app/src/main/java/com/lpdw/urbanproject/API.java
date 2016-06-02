@@ -1,26 +1,23 @@
 package com.lpdw.urbanproject;
 
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.http.Body;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
+import retrofit2.http.Path;
 
 /**
  * Created by OBYON on 30/05/16.
  */
 public interface API {
-    @Headers("Content-Type: application/json, Accept: application/json")
+    @Headers("Content-DataContainer: application/json, Accept: application/json")
     @POST("token")
     Call<Token> createUser(@Body User user);
 
     @Headers("Accept: application/json")
-    Call<Data> getData(String slug);
+    @GET("types/{slug}")
+    Call<DataContainer> getData(@Path("slug") String slug);
 }
 
 
