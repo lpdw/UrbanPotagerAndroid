@@ -1,6 +1,7 @@
 package com.lpdw.urbanproject;
 
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
@@ -14,6 +15,7 @@ import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.text.InputFilter;
 import android.text.Spanned;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -43,7 +45,7 @@ public class SettingsActivity extends ActionBarActivity {
 
     }
 
-    public class ParametersFragment extends PreferenceFragment  {
+    public class ParametersFragment extends PreferenceFragment {
 
         private AppCompatDelegate mDelegate;
 
@@ -55,8 +57,8 @@ public class SettingsActivity extends ActionBarActivity {
 
         }
 
-        public class MyPreferenceFragment extends PreferenceFragment implements
-                SharedPreferences.OnSharedPreferenceChangeListener
+
+        public class MyPreferenceFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener
         {
 
             @Override
@@ -64,61 +66,57 @@ public class SettingsActivity extends ActionBarActivity {
             {
                 super.onCreate(savedInstanceState);
                 addPreferencesFromResource(R.xml.preference);
-                EditText editAirB = ((EditTextIntegerPreference) findPreference("editTemp_Key")).getEditText();
-                editAirB.setFilters(new InputFilter[]{ new InputFilter() {
-                    @Override
-                    public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
-                        try {
-                            int input = Integer.parseInt(dest.toString() + source.toString());
-                            if (input<20 && input >-10)
-                                return null;
-                        } catch (NumberFormatException nfe) { }
-                        return "";
-                    }
-                } });
 
-                EditText editAirH = ((EditTextIntegerPreference) findPreference("editTemp_Key2")).getEditText();
-                editAirH.setFilters(new InputFilter[]{ new InputFilter() {
-                    @Override
-                    public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
-                        try {
-                            int input = Integer.parseInt(dest.toString() + source.toString());
-                            if (input<60 && input >0)
-                                return null;
-                        } catch (NumberFormatException nfe) { }
-                        return "";
-                    }
-                } });
-
-                EditText editEauB = ((EditTextIntegerPreference) findPreference("editEau_Key")).getEditText();
-                editEauB.setFilters(new InputFilter[]{ new InputFilter() {
-                    @Override
-                    public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
-                        try {
-                            int input = Integer.parseInt(dest.toString() + source.toString());
-                            if (input<20 && input >-10)
-                                return null;
-                        } catch (NumberFormatException nfe) { }
-                        return "";
-                    }
-                } });
-
-                EditText editEauE = ((EditTextIntegerPreference) findPreference("editEau_Key2")).getEditText();
-                editEauE.setFilters(new InputFilter[]{ new InputFilter() {
-                    @Override
-                    public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
-                        try {
-                            int input = Integer.parseInt(dest.toString() + source.toString());
-                            if (input<60 && input >-0)
-                                return null;
-                        } catch (NumberFormatException nfe) { }
-                        return "";
-                    }
-                } });
             }
 
-            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
-                                                  String key) {
+            @Override
+            public void onResume() {
+                super.onResume();
+                getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
+            }
+
+            @Override
+            public void onPause() {
+                super.onPause();
+                getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
+            }
+
+            @Override
+            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+
+                switch(key) {
+                    //Boolean Type
+                    case "pref_sync":
+                    case "pref_sync2":
+                    case "pref_sync3":
+                    case "pref_sync4":
+                    case "pref_sync5":
+                    case "pref_sync6":
+                    case "checkboxPref": {
+                        Toast.makeText(getActivity().getApplicationContext(), "Changed key: " + key +" : "+sharedPreferences.getBoolean(key, false), Toast.LENGTH_LONG).show();
+                        break;
+                    }
+                    //String Type
+                    case "EclairageD_key":
+                    case "EclairageFinal_key":
+                    case "ArrosageD_key":
+                    case "ArrosageFinal_key":
+                    {
+                        Toast.makeText(getActivity().getApplicationContext(), "Changed key: " + key +" : "+sharedPreferences.getString(key, ""), Toast.LENGTH_LONG).show();
+                        break;
+                    }
+                    //Integer Type
+                    case "seekbar1":
+                    case "seekbar2":
+                    case "seekbar3":
+                    case "seekTemp_Key":
+                    case "seekTemp_Key2":
+                    case "seekEau_Key":
+                    case "seekEau_Key2":{
+                        Toast.makeText(getActivity().getApplicationContext(), "Changed key: " + key +" : "+sharedPreferences.getInt(key, 00), Toast.LENGTH_LONG).show();
+                        break;
+                    }
+                }
             }
         }
     }

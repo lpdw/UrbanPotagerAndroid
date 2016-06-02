@@ -67,18 +67,50 @@
     <PreferenceCategory
         android:key="pref_key_category_3"
         android:title="NOTIFICATION ALERT">
-        <com.lpdw.urbanproject.EditTextIntegerPreference
-            android:key="editTemp_Key"
-            android:title="Alert température air basse (-10°c et 20°c )" />
-        <com.lpdw.urbanproject.EditTextIntegerPreference
-            android:key="editTemp_Key2"
-            android:title="Alert température air élevée (0°c et 60°c )"/>
-        <com.lpdw.urbanproject.EditTextIntegerPreference
-            android:key="editEau_Key"
-            android:title="Alert température eau basse (-10°c et 20°c )"/>
-        <com.lpdw.urbanproject.EditTextIntegerPreference
-            android:key="editEau_Key2"
-            android:title="Alert température eau élevée (0°c et 60°c )" />
+        <com.pavelsikun.seekbarpreference.SeekBarPreference
+            android:key="seekTemp_Key"
+            android:title="Alert température air basse (-10°c et 20°c )"
+            android:enabled="true"
+            android:defaultValue="50"
+
+            sample:msbp_minValue="-10"
+            sample:msbp_maxValue="20"
+            sample:msbp_interval="1"
+            sample:msbp_measurementUnit="°c"
+            sample:msbp_dialogEnabled="false"/>
+        <com.pavelsikun.seekbarpreference.SeekBarPreference
+            android:key="seekTemp_Key2"
+            android:title="Alert température air élevée (0°c et 60°c )"
+            android:enabled="true"
+            android:defaultValue="50"
+
+            sample:msbp_minValue="0"
+            sample:msbp_maxValue="60"
+            sample:msbp_interval="1"
+            sample:msbp_measurementUnit="°c"
+            sample:msbp_dialogEnabled="false"/>
+        <com.pavelsikun.seekbarpreference.SeekBarPreference
+            android:key="seekEau_Key"
+            android:title="Alert température eau basse (-10°c et 20°c )"
+            android:enabled="true"
+            android:defaultValue="50"
+
+            sample:msbp_minValue="-10"
+            sample:msbp_maxValue="20"
+            sample:msbp_interval="1"
+            sample:msbp_measurementUnit="°c"
+            sample:msbp_dialogEnabled="false"/>
+        <com.pavelsikun.seekbarpreference.SeekBarPreference
+            android:key="seekEau_Key2"
+            android:title="Alert température eau basse (-10°c et 20°c )"
+            android:enabled="true"
+            android:defaultValue="50"
+
+            sample:msbp_minValue="0"
+            sample:msbp_maxValue="60"
+            sample:msbp_interval="1"
+            sample:msbp_measurementUnit="°c"
+            sample:msbp_dialogEnabled="false"/>
         <com.pavelsikun.seekbarpreference.SeekBarPreference
             android:key="seekbar2"
             android:title="Humidité élevée"
