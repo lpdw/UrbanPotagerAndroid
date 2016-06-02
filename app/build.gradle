@@ -17,6 +17,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    packagingOptions {
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+    }
 }
 
 ext {
@@ -30,9 +34,7 @@ dependencies {
     compile "com.android.support:appcompat-v7:${supportLibVersion}"
     compile "com.android.support:design:${supportLibVersion}"
     compile 'com.android.support:preference-v7:23.0.1'
-<<<<<<< HEAD
     compile 'com.pavelsikun:material-seekbar-preference:2.3.0+'
-=======
-    compile 'com.pavelsikun:material-seekbar-preference:2.2.0+'
->>>>>>> Preference page
+    compile 'com.squareup.retrofit2:retrofit:2.0.0'
+    compile 'com.squareup.retrofit2:converter-jackson:2.0.0'
 }

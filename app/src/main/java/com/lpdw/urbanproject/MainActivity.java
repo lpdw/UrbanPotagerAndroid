@@ -2,7 +2,9 @@ package com.lpdw.urbanproject;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -36,6 +38,11 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById((R.id.nav_view));
         navigationView.setNavigationItemSelectedListener(this);
+
+        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("testMax", "maximus");
+        editor.commit();
 
         View navHeader = navigationView.getHeaderView(0);
         ((TextView) navHeader.findViewById(R.id.menu_name)).setText("PIERRE CYRIL");
