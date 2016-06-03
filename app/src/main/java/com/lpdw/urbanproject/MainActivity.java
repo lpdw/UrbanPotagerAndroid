@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity
 
         View navHeader = navigationView.getHeaderView(0);
         ((TextView) navHeader.findViewById(R.id.menu_name)).setText("PIERRE CYRIL");
-        ((TextView) navHeader.findViewById(R.id.menu_email)).setText("pierreciryld@android.com");
+        ((TextView) navHeader.findViewById(R.id.menu_email)).setText("pierrecyrild@android.com");
 
         getSupportFragmentManager().beginTransaction().add(R.id.fragmentContainer, new NewGardenFragment()).commit();
     }
