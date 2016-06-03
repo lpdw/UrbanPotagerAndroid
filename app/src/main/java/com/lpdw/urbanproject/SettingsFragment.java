@@ -17,23 +17,11 @@ public class SettingsFragment extends PreferenceFragmentCompat
     {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preference);
-        android.support.v7.preference.PreferenceManager preferenceManager = getPreferenceManager();
-        if (preferenceManager.getSharedPreferences().getBoolean("pref_sync", true)){
-            // Your switch is on
-        } else {
-            // Your switch is off
-        }
     }
 
     @Override
     public void onCreatePreferences(Bundle bundle, String s) {
         super.onCreate(bundle);
         addPreferencesFromResource(R.xml.preference);
-        android.support.v7.preference.PreferenceManager preferenceManager = getPreferenceManager();
-        if (preferenceManager.getSharedPreferences().getBoolean("pref_sync", true)){
-            // Your switch is on
-        } else {
-            // Your switch is off
-        }
     }
 }

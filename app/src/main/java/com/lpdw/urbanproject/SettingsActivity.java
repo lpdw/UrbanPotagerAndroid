@@ -11,12 +11,14 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
@@ -28,7 +30,7 @@ import android.preference.PreferenceGroup;
  * Created by mangubu on 03/05/16.
  */
 
-public class SettingsActivity extends ActionBarActivity {
+public class SettingsActivity extends /*ActionBarActivity*/ AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +47,13 @@ public class SettingsActivity extends ActionBarActivity {
 
     }
 
-    public class ParametersFragment extends PreferenceFragment {
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
+    }
+
+    public static class ParametersFragment extends PreferenceFragment {
 
         private AppCompatDelegate mDelegate;
 
@@ -58,7 +66,7 @@ public class SettingsActivity extends ActionBarActivity {
         }
 
 
-        public class MyPreferenceFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener
+        public static class MyPreferenceFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener
         {
 
             @Override

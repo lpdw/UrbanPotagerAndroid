@@ -78,7 +78,8 @@ public class GardenFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         //Get settings button click to lauch settings fragment associated to the current garden
         if(v.getId() == 123){
-            //INSERT PREFERENCE FRAGMENT
+            Intent intent = new Intent(getContext(), SettingsActivity.class);
+            startActivity(intent);
         }
     }
 
