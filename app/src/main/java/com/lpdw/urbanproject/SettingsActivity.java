@@ -49,6 +49,7 @@ public class SettingsActivity extends /*ActionBarActivity*/ AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp(){
+        getSupportFragmentManager().popBackStack();
         finish();
         return true;
     }

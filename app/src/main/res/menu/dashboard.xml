@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!-- Settings, should always be in the overflow -->
-    <item android:id="@+id/valid_garden_location"
+    <item android:id="@+id/settings_dashboard"
+        android:icon="@drawable/ic_settings_white_24dp"
         android:title="@string/ignore"
         app:showAsAction="always"/>
 </menu>
