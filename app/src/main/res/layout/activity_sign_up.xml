@@ -17,6 +17,17 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="Name"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingTop="17dp"
+            android:paddingBottom="17dp"
+            android:id="@+id/sign_up_name"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
             android:hint="Email"
             android:paddingLeft="12dp"

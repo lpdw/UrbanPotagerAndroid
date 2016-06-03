@@ -19,9 +19,6 @@ public class GardenDashboardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View fragContainer = inflater.inflate(R.layout.fragment_garden_dashboard, container, false);
 
-        ApiCallSender aps = new ApiCallSender(getActivity());
-        aps.getData("test");
-
         //On récupère les données inscrites dans data_file
         Log.d("TEST", getActivity().getSharedPreferences("data_file", getActivity().MODE_PRIVATE).getString("test", "no data"));
 
