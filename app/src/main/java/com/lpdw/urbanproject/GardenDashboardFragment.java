@@ -23,7 +23,13 @@ public class GardenDashboardFragment extends Fragment {
         aps.getData("test");
 
         //On récupère les données inscrites dans data_file
+        while (getActivity().getSharedPreferences("data_file", getActivity().MODE_PRIVATE).getString("test", "no data") == "no data"){
+            Log.d("TEST", "fuck");
+        }
         Log.d("TEST", getActivity().getSharedPreferences("data_file", getActivity().MODE_PRIVATE).getString("test", "no data"));
+
+        //aps.getGarden("jardin1-user1");
+        //Log.d("TEST", getActivity().getSharedPreferences("data_file", getActivity().MODE_PRIVATE).getString("jardin1-user1", "no data"));
 
         return fragContainer;
     }

@@ -18,6 +18,10 @@ public interface API {
     @Headers("Accept: application/json")
     @GET("types/{slug}")
     Call<DataContainer> getData(@Path("slug") String slug);
+
+    @Headers("Accept: application/json")
+    @GET("gardens/{slug}")
+    Call<GardenContainer> getGarden(@Path("slug") String slug);
 }
 
 

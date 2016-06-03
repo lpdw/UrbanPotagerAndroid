@@ -10,7 +10,10 @@
         android:layout_height="wrap_content"
         app:tabMode="fixed"
         app:tabGravity="fill"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:tabIndicatorHeight="6dp"
+        app:tabTextColor="@color/colorPrimaryLight"
+        app:tabSelectedTextColor="@color/white"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"

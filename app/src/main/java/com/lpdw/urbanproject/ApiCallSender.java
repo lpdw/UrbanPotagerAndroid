@@ -24,6 +24,7 @@ public class ApiCallSender {
     public Interceptor interceptor;
     public OkHttpClient.Builder builder;
     public Retrofit retrofit;
+    public API api;
 
     public ApiCallSender(Context context){
         this.context = context;
@@ -48,6 +49,8 @@ public class ApiCallSender {
                 .addConverterFactory(JacksonConverterFactory.create())
                 .client(client)
                 .build();
+
+        this.api = retrofit.create(API.class);
     }
 
     private void writeInSharedPref(String file_title, String content_title, String content){
@@ -58,15 +61,29 @@ public class ApiCallSender {
     }
 
     public void getData(String slug){
-        API api = retrofit.create(API.class);
-
-        Call<DataContainer> call = api.getData("test");
+        context.getSharedPreferences("data_file", 0).edit().clear().commit();
+        Call<DataContainer> call = api.getData(slug);
         call.enqueue(new Callback<DataContainer>() {
             public void onResponse(Call<DataContainer> call, Response<DataContainer> response) {
-                writeInSharedPref("data_file", response.body().type.name, response.body().type.description);
+                writeInSharedPref("data_file", response.body().type.slug, response.body().type.description);
             }
             @Override
             public void onFailure(Call<DataContainer> call, Throwable t) {
+                Log.d("FAIL", t.getMessage());
+            }
+        });
+    }
+
+    public void getGarden(String slug){
+        Call<GardenContainer> call = api.getGarden(slug);
+        call.enqueue(new Callback<GardenContainer>() {
+            public void onResponse(Call<GardenContainer> call, Response<GardenContainer> response) {
+                writeInSharedPref("data_file", response.body().garden.slug, response.body().garden.description);
+                Log.d("test", String.valueOf(response.code()));
+                Log.d("test", String.valueOf(response.body().garden.description));
+            }
+            @Override
+            public void onFailure(Call<GardenContainer> call, Throwable t) {
                 Log.d("FAIL", t.getMessage());
             }
         });
