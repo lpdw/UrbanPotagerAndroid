@@ -16,17 +16,22 @@ public class User {
     public String username;
     public String email;
     public String plainPassword;
-    public Text token;
-    @JsonProperty("refresh_token")
-    public Text refreshToken;
+    public String token;
+    public String refreshToken;
     public Boolean enabled;
     public ArrayList<String> roles;
 
-    public User(String username, String email, String plainPassword) {
+    public User(String username, String plainPassword, String email) {
         this.username = username;
+        this.plainPassword = plainPassword;
         this.email = email;
+    }
+
+    public User(String username, String plainPassword) {
+        this.username = username;
         this.plainPassword = plainPassword;
     }
+
     public User() {
 
     }

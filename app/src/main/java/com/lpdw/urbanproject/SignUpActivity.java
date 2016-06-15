@@ -10,12 +10,21 @@ import android.widget.TextView;
 
 import com.lpdw.urbanproject.Api.UrbanPotagerApi;
 
+import retrofit2.Call;
+
 /**
  * Created by yassin on 03/05/16.
  */
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Me me = Me.get();
+
+        if (me.username != null || me.plainPassword != null){
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
@@ -41,23 +50,27 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 TextView emailTextView = (TextView) findViewById(R.id.sign_up_email);
                 TextView passwordTextView = (TextView) findViewById(R.id.sign_up_password);
 
-                User user = new User(userNameTextView.getText().toString(), emailTextView.getText().toString(), passwordTextView.getText().toString());
+                Me me = new Me(userNameTextView.getText().toString(), passwordTextView.getText().toString(), emailTextView.getText().toString());
                 UrbanPotagerApi api = new UrbanPotagerApi();
-                api.createUser(user, new UrbanPotagerApi.CallbackCreateUser() {
+                api.createUser(me, new UrbanPotagerApi.CallbackWrapper() {
                     @Override
-                    public void onFailure(Throwable t) {
-
+                    public void onFailure(Call call, Throwable t) {
+                        t.printStackTrace();
                     }
 
                     @Override
-                    public void onResponse(User user) {
-                        if (user != null){
-                            Log.i("Info", user.username);
+                    public void onResponse(Object object) {
+                        Me me = (Me) object;
+
+                        if (me != null){
+                            me.save();
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(intent);
+                            Log.i("Info", me.username);
                         }
                     }
                 });
 
-                targetClass = MainActivity.class;
                 break;
             case R.id.sign_up_to_sign_in:
                 targetClass = SignInActivity.class;

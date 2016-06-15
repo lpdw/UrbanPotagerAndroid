@@ -62,4 +62,5 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-jackson:2.0.0'
     compile 'com.pavelsikun:material-seekbar-preference:2.2.0+'
     compile 'com.google.android.gms:play-services:8.4.0'
+    compile 'com.google.code.gson:gson:2.5'
 }
