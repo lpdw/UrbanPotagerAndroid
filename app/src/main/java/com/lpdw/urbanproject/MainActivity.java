@@ -23,6 +23,11 @@ import android.view.View;
 import android.widget.SearchView;
 import android.widget.TextView;
 
+import com.lpdw.urbanproject.Api.Response;
+import com.lpdw.urbanproject.Api.UrbanPotagerApi;
+
+import retrofit2.Call;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
     public Toolbar toolbar;
@@ -43,11 +48,6 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById((R.id.nav_view));
         navigationView.setNavigationItemSelectedListener(this);
 
-        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString("testMax", "maximus");
-        editor.commit();
-
         View navHeader = navigationView.getHeaderView(0);
 
         Me me = Me.get();
@@ -55,7 +55,27 @@ public class MainActivity extends AppCompatActivity
         ((TextView) navHeader.findViewById(R.id.menu_name)).setText(me.username);
         ((TextView) navHeader.findViewById(R.id.menu_email)).setText(me.email);
 
+        getMyGardens();
+
         getSupportFragmentManager().beginTransaction().add(R.id.fragmentContainer, new NewGardenFragment()).commit();
+    }
+
+    private void getMyGardens(){
+        UrbanPotagerApi api = new UrbanPotagerApi();
+        api.myGardens(new UrbanPotagerApi.CallbackWrapper() {
+            @Override
+            public void onResponse(Object object) {
+                MyGardens myGardens = new MyGardens((Garden[])object);
+                if (myGardens != null) {
+                    myGardens.save();
+                }
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 
     @Override

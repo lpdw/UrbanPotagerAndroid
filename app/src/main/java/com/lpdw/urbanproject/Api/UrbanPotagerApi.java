@@ -1,10 +1,9 @@
 package com.lpdw.urbanproject.Api;
 
+import android.util.Log;
+
 import com.lpdw.urbanproject.Me;
 import com.lpdw.urbanproject.Token;
-import com.lpdw.urbanproject.User;
-
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 
@@ -16,14 +15,17 @@ import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 /**
  * Created by yassin on 03/06/16.
  */
 public class UrbanPotagerApi {
     final String baseUrl = "https://urbanpotager.labesse.me/";
+
     public interface API {
         @FormUrlEncoded
         @POST("users")
@@ -36,6 +38,12 @@ public class UrbanPotagerApi {
         @FormUrlEncoded
         @POST("me")
         Call<Response> me(@Header("Authorization") String contentRange);
+
+        @GET("me/gardens")
+        Call<Response> myGardens();
+
+        @GET("gardens/{slugGarden}/measures/{slugType}")
+        Call<Response> getMeasure(@Path("slugGarden") String slugGarden, @Path("slugType") String slugType);
     }
 
     public abstract static class CallbackWrapper {
@@ -136,6 +144,66 @@ public class UrbanPotagerApi {
             public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
                 if (response.code() == 200 && response.body() != null) {
                     callbackWrapper.onResponse(response.body());
+                } else {
+                    Throwable t = new Throwable(String.format("HTTP CODE: %d", response.code()));
+                    callbackWrapper.onFailure(call, t);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Response> call, Throwable t) {
+                callbackWrapper.onFailure(call, t);
+            }
+        });
+    }
+
+    public void getMeasure(final String gardenSlug, final String typeSlug, final CallbackWrapper callbackWrapper){
+        Retrofit retro = new Retrofit.Builder()
+                .baseUrl(baseUrl)
+                .addConverterFactory(JacksonConverterFactory.create())
+                .client(interceptorAuthorizationHeader())
+                .build();
+        API api = retro.create(API.class);
+
+        Call<Response> call = api.getMeasure(gardenSlug, typeSlug);
+
+        call.enqueue(new retrofit2.Callback<Response>() {
+
+            @Override
+            public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+                if (response.code() == 200 && response.body() != null) {
+                    Log.d("toto", response.headers().toString());
+                    Log.d("toto", response.raw().toString());
+                    callbackWrapper.onResponse(response.body().measures);
+                } else {
+                    Throwable t = new Throwable(String.format("HTTP CODE: %d", response.code()));
+                    callbackWrapper.onFailure(call, t);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Response> call, Throwable t) {
+                callbackWrapper.onFailure(call, t);
+            }
+        });
+    }
+
+    public void myGardens(final CallbackWrapper callbackWrapper){
+        Retrofit retro = new Retrofit.Builder()
+                .baseUrl(baseUrl)
+                .addConverterFactory(JacksonConverterFactory.create())
+                .client(interceptorAuthorizationHeader())
+                .build();
+        API api = retro.create(API.class);
+
+        Call<Response> call = api.myGardens();
+
+        call.enqueue(new retrofit2.Callback<Response>() {
+
+            @Override
+            public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+                if (response.code() == 200 && response.body() != null) {
+                    callbackWrapper.onResponse(response.body().gardens);
                 } else {
                     Throwable t = new Throwable(String.format("HTTP CODE: %d", response.code()));
                     callbackWrapper.onFailure(call, t);
