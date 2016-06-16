@@ -36,6 +36,10 @@ public class UrbanPotagerApi {
         Call<Token> signIn(@Field("username") String username, @Field("password") String password);
 
         @FormUrlEncoded
+        @POST("token/refresh")
+        Call<Token> refreshToken(@Field("refresh_token") String refresh_token);
+
+        @FormUrlEncoded
         @POST("me")
         Call<Response> me(@Header("Authorization") String contentRange);
 
@@ -122,6 +126,38 @@ public class UrbanPotagerApi {
             @Override
             public void onFailure(Call<Token> call, Throwable t) {
                 callbackWrapper.onFailure(call, t);
+            }
+        });
+    }
+
+    public void refreshToken(final Me me){
+        Retrofit retro = new Retrofit.Builder()
+                .baseUrl(baseUrl)
+                .addConverterFactory(JacksonConverterFactory.create())
+                .build();
+        API api = retro.create(API.class);
+
+        Call<Token> call = api.refreshToken(me.refreshToken);
+
+        call.enqueue(new retrofit2.Callback<Token>() {
+
+            @Override
+            public void onResponse(Call<Token> call, retrofit2.Response<Token> token) {
+                if (token.code() == 200 && token.body() != null) {
+                    //callbackWrapper.onResponse(token.body());
+                    Log.d("TOKEN", token.body().token);
+                    me.token = token.body().token;
+                    me.save();
+                } else {
+                    Throwable t = new Throwable(String.format("HTTP CODE: %d", token.code()));
+                    onFailure(call, t);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Token> call, Throwable t) {
+                //callbackWrapper.onFailure(call, t);
+                t.printStackTrace();
             }
         });
     }
