@@ -1,25 +1,23 @@
 package com.lpdw.urbanproject.Api;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.lpdw.urbanproject.Alert;
-import com.lpdw.urbanproject.Garden;
 import com.lpdw.urbanproject.Measure;
 import com.lpdw.urbanproject.Type;
 
 /**
- * Created by yassin on 03/06/16.
+ * Created by OBYON on 16/06/16.
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Response {
-    @JsonProperty("user")
-    public Me me;
-
-    public Garden[] gardens;
+public class DataResponse {
+    public Measure[] measures;
     public Alert[] alerts;
     public Type[] types;
-
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class Me extends com.lpdw.urbanproject.Me{
-    }
+    @JsonProperty("total_items")
+    public String totalItems;
+    @JsonProperty("item_per_page")
+    public int itemPePage;
+    public int page;
 }

@@ -46,8 +46,16 @@ public class UrbanPotagerApi {
         @GET("me/gardens")
         Call<Response> myGardens();
 
+        @GET("alerts")
+        Call<DataResponse> getAllAlerts();
+
+        @GET("types")
+        Call<Response> getAllTypes();
+
         @GET("gardens/{slugGarden}/measures/{slugType}")
-        Call<Response> getMeasure(@Path("slugGarden") String slugGarden, @Path("slugType") String slugType);
+        Call<DataResponse> getMeasure(@Path("slugGarden") String slugGarden, @Path("slugType") String slugType);
+
+
     }
 
     public abstract static class CallbackWrapper {
@@ -201,16 +209,16 @@ public class UrbanPotagerApi {
                 .build();
         API api = retro.create(API.class);
 
-        Call<Response> call = api.getMeasure(gardenSlug, typeSlug);
+        Call<DataResponse> call = api.getMeasure(gardenSlug, typeSlug);
 
-        call.enqueue(new retrofit2.Callback<Response>() {
+        call.enqueue(new retrofit2.Callback<DataResponse>() {
 
             @Override
-            public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+            public void onResponse(Call<DataResponse> call, retrofit2.Response<DataResponse> response) {
                 if (response.code() == 200 && response.body() != null) {
                     Log.d("toto", response.headers().toString());
                     Log.d("toto", response.raw().toString());
-                    callbackWrapper.onResponse(response.body().measures);
+                    callbackWrapper.onResponse(response.body());
                 } else {
                     Throwable t = new Throwable(String.format("HTTP CODE: %d", response.code()));
                     callbackWrapper.onFailure(call, t);
@@ -218,7 +226,7 @@ public class UrbanPotagerApi {
             }
 
             @Override
-            public void onFailure(Call<Response> call, Throwable t) {
+            public void onFailure(Call<DataResponse> call, Throwable t) {
                 callbackWrapper.onFailure(call, t);
             }
         });
@@ -248,6 +256,37 @@ public class UrbanPotagerApi {
 
             @Override
             public void onFailure(Call<Response> call, Throwable t) {
+                callbackWrapper.onFailure(call, t);
+            }
+        });
+    }
+
+    public void getAllAlerts(final CallbackWrapper callbackWrapper){
+        Retrofit retro = new Retrofit.Builder()
+                .baseUrl(baseUrl)
+                .addConverterFactory(JacksonConverterFactory.create())
+                .client(interceptorAuthorizationHeader())
+                .build();
+        API api = retro.create(API.class);
+
+        Call<DataResponse> call = api.getAllAlerts();
+
+        call.enqueue(new retrofit2.Callback<DataResponse>() {
+
+            @Override
+            public void onResponse(Call<DataResponse> call, retrofit2.Response<DataResponse> response) {
+                Log.d("alerts", response.raw().toString());
+                Log.d("alerts", String.valueOf(response.code()));
+                if (response.code() == 200 && response.body() != null) {
+                    callbackWrapper.onResponse(response.body());
+                } else {
+                    Throwable t = new Throwable(String.format("HTTP CODE: %d", response.code()));
+                    callbackWrapper.onFailure(call, t);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DataResponse> call, Throwable t) {
                 callbackWrapper.onFailure(call, t);
             }
         });
