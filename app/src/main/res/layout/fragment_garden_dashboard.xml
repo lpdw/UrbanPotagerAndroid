@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginLeft="20dp"
     android:layout_marginRight="20dp"
     android:orientation="vertical"
@@ -13,8 +14,9 @@
         style="@style/wrap_content.text_title"
         android:text="Dashboard"/>
     <LinearLayout
-        style="@style/wrap_content"
+        style="@style/match_parent"
         android:orientation="horizontal"
+        android:gravity="center"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_centerHorizontal="true">
@@ -24,35 +26,25 @@
             <TextView
                 style="@style/wrap_content.text_round"
                 android:background="@drawable/bg_round_orange"
-                android:id="@+id/tv_tempValue"
-                android:text="60%"/>
+                android:id="@+id/dashboard_airTemp"
+                android:text="n/a"/>
             <TextView
                 style="@style/wrap_content"
-                android:text="Temp"/>
+                android:text="Air"/>
         </LinearLayout>
 
-        <LinearLayout
-            style="@style/wrap_content.vertical_center">
-            <TextView
-                style="@style/wrap_content.text_round"
-                android:background="@drawable/bg_round_red"
-                android:id="@+id/tv_humidityValue"
-                android:text="2%"/>
-            <TextView
-                style="@style/wrap_content"
-                android:text="Hum"/>
-        </LinearLayout>
+
 
         <LinearLayout
             style="@style/wrap_content.vertical_center">
             <TextView
                 style="@style/wrap_content.text_round"
                 android:background="@drawable/bg_round_green"
-                android:id="@+id/tv_lightValue"
-                android:text="47%"/>
+                android:id="@+id/dashboard_humidity"
+                android:text="n/a"/>
             <TextView
                 style="@style/wrap_content"
-                android:text="Light"/>
+                android:text="Humidity"/>
         </LinearLayout>
 
         <LinearLayout
@@ -60,12 +52,12 @@
             <TextView
                 style="@style/wrap_content.text_round"
                 android:background="@drawable/bg_round_orange"
-                android:id="@+id/tv_airValue"
+                android:id="@+id/dashboard_light"
                 android:paddingLeft="8dp"
                 android:drawableLeft="@drawable/ic_emoticon_happy"/>
             <TextView
                 style="@style/wrap_content"
-                android:text="Air"/>
+                android:text="Light"/>
         </LinearLayout>
 
     </LinearLayout>
@@ -76,9 +68,10 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop ="20dp"
-        android:progress="50"
+        android:id="@+id/dashboard_waterLvlBar"
+        android:progress="0"
         android:max="100"
-        android:secondaryProgress="80"/>
+        android:secondaryProgress="0"/>
 
     <TextView
         style="@style/wrap_content"
@@ -88,7 +81,8 @@
         style="@style/wrap_content.green_bold_text"
         android:layout_gravity="center"
         android:layout_marginBottom="20dp"
-        android:text="75%"/>
+        android:id="@+id/dashboard_waterLvlTv"
+        android:text="n/a"/>
 
     <LinearLayout
         style="@style/wrap_content"

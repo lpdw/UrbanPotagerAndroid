@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity
             public void onResponse(Object object) {
                 MyGardens myGardens = new MyGardens((Garden[])object);
                 if (myGardens != null) {
+                    Log.d("MY GARDENS", myGardens.gardens[0].description);
                     myGardens.save();
                 }
             }
