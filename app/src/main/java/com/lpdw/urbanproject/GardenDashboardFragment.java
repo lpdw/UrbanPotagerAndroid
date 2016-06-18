@@ -41,7 +41,22 @@ public class GardenDashboardFragment extends Fragment {
             public void onResponse(Object object) {
                 DataResponse response = (DataResponse) object;
                 if (response != null) {
-                    Log.d("Requete measures OK -> test = ", String.valueOf(response.alerts[0].description));
+                    Log.d("Requete alerts OK -> test = ", String.valueOf(response.alerts[0].description));
+                }
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+
+        api.getAllTypes(new UrbanPotagerApi.CallbackWrapper() {
+            @Override
+            public void onResponse(Object object) {
+                DataResponse response = (DataResponse) object;
+                if (response != null) {
+                    Log.d("Requete types OK -> test = ", String.valueOf(response.types[0].description));
                 }
             }
 

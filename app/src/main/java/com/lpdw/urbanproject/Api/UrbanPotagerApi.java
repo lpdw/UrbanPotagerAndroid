@@ -50,7 +50,7 @@ public class UrbanPotagerApi {
         Call<DataResponse> getAllAlerts();
 
         @GET("types")
-        Call<Response> getAllTypes();
+        Call<DataResponse> getAllTypes();
 
         @GET("gardens/{slugGarden}/measures/{slugType}")
         Call<DataResponse> getMeasure(@Path("slugGarden") String slugGarden, @Path("slugType") String slugType);
@@ -138,7 +138,7 @@ public class UrbanPotagerApi {
         });
     }
 
-    public void refreshToken(final Me me){
+    public void refreshToken(final Me me, final CallbackWrapper callbackWrapper){
         Retrofit retro = new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addConverterFactory(JacksonConverterFactory.create())
@@ -153,8 +153,9 @@ public class UrbanPotagerApi {
             public void onResponse(Call<Token> call, retrofit2.Response<Token> token) {
                 if (token.code() == 200 && token.body() != null) {
                     //callbackWrapper.onResponse(token.body());
-                    Log.d("TOKEN", token.body().token);
+                    Log.d("REFRESHING TOKEN", token.body().token);
                     me.token = token.body().token;
+                    me.refreshed = true;
                     me.save();
                 } else {
                     Throwable t = new Throwable(String.format("HTTP CODE: %d", token.code()));
@@ -216,15 +217,27 @@ public class UrbanPotagerApi {
             @Override
             public void onResponse(Call<DataResponse> call, retrofit2.Response<DataResponse> response) {
                 if (response.code() == 200 && response.body() != null) {
-                    Log.d("toto", response.headers().toString());
-                    Log.d("toto", response.raw().toString());
+                    Me.get().unsetRefreshed();
                     callbackWrapper.onResponse(response.body());
                 } else {
                     Throwable t = new Throwable(String.format("HTTP CODE: %d", response.code()));
-                    callbackWrapper.onFailure(call, t);
+                    if(response.code() == 401 && !Me.get().refreshed){
+                        refreshToken(Me.get(), new UrbanPotagerApi.CallbackWrapper() {
+                            @Override
+                            public void onResponse(Object object) {
+                                getMeasure(gardenSlug, typeSlug, callbackWrapper);
+                            }
+
+                            @Override
+                            public void onFailure(Call call, Throwable t) {
+                                callbackWrapper.onFailure(call, t);
+                            }
+                        });
+                    } else {
+                        callbackWrapper.onFailure(call, t);
+                    }
                 }
             }
-
             @Override
             public void onFailure(Call<DataResponse> call, Throwable t) {
                 callbackWrapper.onFailure(call, t);
@@ -275,8 +288,35 @@ public class UrbanPotagerApi {
 
             @Override
             public void onResponse(Call<DataResponse> call, retrofit2.Response<DataResponse> response) {
-                Log.d("alerts", response.raw().toString());
-                Log.d("alerts", String.valueOf(response.code()));
+                if (response.code() == 200 && response.body() != null) {
+                    callbackWrapper.onResponse(response.body());
+                } else {
+                    Throwable t = new Throwable(String.format("HTTP CODE: %d", response.code()));
+                    callbackWrapper.onFailure(call, t);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DataResponse> call, Throwable t) {
+                callbackWrapper.onFailure(call, t);
+            }
+        });
+    }
+
+    public void getAllTypes(final CallbackWrapper callbackWrapper){
+        Retrofit retro = new Retrofit.Builder()
+                .baseUrl(baseUrl)
+                .addConverterFactory(JacksonConverterFactory.create())
+                .client(interceptorAuthorizationHeader())
+                .build();
+        API api = retro.create(API.class);
+
+        Call<DataResponse> call = api.getAllTypes();
+
+        call.enqueue(new retrofit2.Callback<DataResponse>() {
+
+            @Override
+            public void onResponse(Call<DataResponse> call, retrofit2.Response<DataResponse> response) {
                 if (response.code() == 200 && response.body() != null) {
                     callbackWrapper.onResponse(response.body());
                 } else {

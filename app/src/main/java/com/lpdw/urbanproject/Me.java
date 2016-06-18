@@ -2,6 +2,7 @@ package com.lpdw.urbanproject;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -15,6 +16,8 @@ import java.util.ArrayList;
  */
 public class Me extends User {
 
+    public boolean refreshed;
+
     public Me(String username, String plainPassword, String email) {
         super(username, plainPassword, email);
     }
@@ -25,6 +28,14 @@ public class Me extends User {
 
     public Me() {
 
+    }
+
+    public void unsetRefreshed(){
+        if(this.refreshed){
+            this.refreshed = false;
+            save();
+            Log.d("UNSET REFRESHED", String.valueOf(refreshed));
+        }
     }
 
     public void save(){

@@ -7,10 +7,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Alert {
-    float threshold;
-    int comparison;
-    String description;
-    Type type;
-    String name;
-    String slug;
+    public float threshold;
+    public int comparison;
+    public String description;
+    public Type type;
+    public String name;
+    public String slug;
 }

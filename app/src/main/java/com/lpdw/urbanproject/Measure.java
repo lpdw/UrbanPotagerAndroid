@@ -7,6 +7,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Measure{
-    float value;
-    String createdAt;
+    public float value;
+    public String createdAt;
 }
