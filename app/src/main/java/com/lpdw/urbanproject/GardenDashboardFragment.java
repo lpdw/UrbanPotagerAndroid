@@ -55,7 +55,7 @@ public class GardenDashboardFragment extends Fragment {
     }
 
     private void getWaterLvl(){
-        api.getMeasure(gardenSlug, "water-temperature", new UrbanPotagerApi.CallbackWrapper() {
+        api.getMeasure(gardenSlug, "water-level", new UrbanPotagerApi.CallbackWrapper() {
             @Override
             public void onResponse(Object object) {
                 DataResponse response = (DataResponse) object;
