@@ -38,6 +38,13 @@ public class Me extends User {
         }
     }
 
+    public void disconnect(){
+        this.token = null;
+        this.username = null;
+        this.plainPassword = null;
+        this.save();
+    }
+
     public void save(){
         Context context = UrbanPotagerApplication.getAppContext();
 

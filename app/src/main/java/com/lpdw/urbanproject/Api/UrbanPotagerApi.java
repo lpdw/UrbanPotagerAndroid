@@ -328,8 +328,6 @@ public class UrbanPotagerApi {
         });
     }
 
-
-
     public void myGardens(final CallbackWrapper callbackWrapper){
         Retrofit retro = new Retrofit.Builder()
                 .baseUrl(baseUrl)

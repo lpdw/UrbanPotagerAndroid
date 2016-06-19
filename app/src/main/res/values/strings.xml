@@ -19,4 +19,8 @@
     <string name="password_reset_error">Unknown user</string>
     <string name="password_reset_button">Reset password</string>
     <string name="error">Error</string>
+    <string name="disconnect">Log out</string>
+    <string name="disconnect_dialog">Do you really want to log out?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>
