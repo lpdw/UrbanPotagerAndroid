@@ -63,6 +63,12 @@ public class SettingsActivity extends /*ActionBarActivity*/ AppCompatActivity {
         public void onCreate(final Bundle savedInstanceState)
         {
             super.onCreate(savedInstanceState);
+
+            get();
+            getHumidity();
+            getLight();
+            getWaterLvl();
+
             getFragmentManager().beginTransaction().replace(android.R.id.content, new MyPreferenceFragment()).commit();
 
         }

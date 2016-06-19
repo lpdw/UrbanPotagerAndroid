@@ -55,6 +55,9 @@ public class UrbanPotagerApi {
         @GET("gardens/{slugGarden}/measures/{slugType}")
         Call<DataResponse> getMeasure(@Path("slugGarden") String slugGarden, @Path("slugType") String slugType);
 
+        @GET("/gardens/{slugGarden}/configurations")
+        Call<DataResponse> getGardenConfig(@Path("slugGarden") String slugGarden);
+
 
     }
 
@@ -244,6 +247,51 @@ public class UrbanPotagerApi {
             }
         });
     }
+
+    public void getGardenConfig(final String gardenSlug, final CallbackWrapper callbackWrapper){
+        Retrofit retro = new Retrofit.Builder()
+                .baseUrl(baseUrl)
+                .addConverterFactory(JacksonConverterFactory.create())
+                .client(interceptorAuthorizationHeader())
+                .build();
+        API api = retro.create(API.class);
+
+        Call<DataResponse> call = api.getGardenConfig(gardenSlug);
+
+        call.enqueue(new retrofit2.Callback<DataResponse>() {
+
+            @Override
+            public void onResponse(Call<DataResponse> call, retrofit2.Response<DataResponse> response) {
+                if (response.code() == 200 && response.body() != null) {
+                    Me.get().unsetRefreshed();
+                    callbackWrapper.onResponse(response.body());
+                } else {
+                    Throwable t = new Throwable(String.format("HTTP CODE: %d", response.code()));
+                    if(response.code() == 401 && !Me.get().refreshed){
+                        refreshToken(Me.get(), new UrbanPotagerApi.CallbackWrapper() {
+                            @Override
+                            public void onResponse(Object object) {
+                                getGardenConfig(gardenSlug, callbackWrapper);
+                            }
+
+                            @Override
+                            public void onFailure(Call call, Throwable t) {
+                                callbackWrapper.onFailure(call, t);
+                            }
+                        });
+                    } else {
+                        callbackWrapper.onFailure(call, t);
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<DataResponse> call, Throwable t) {
+                callbackWrapper.onFailure(call, t);
+            }
+        });
+    }
+
+
 
     public void myGardens(final CallbackWrapper callbackWrapper){
         Retrofit retro = new Retrofit.Builder()
