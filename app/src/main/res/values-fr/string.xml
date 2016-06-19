@@ -2,6 +2,8 @@
     <string name="app_name">UrbanProject</string>
     <string name="sign_in">S\'identifier</string>
     <string name="sign_up">S\'inscrire</string>
+    <string name="no_account">Je n\'ai pas de compte</string>
+    <string name="forgotten_password">Mot de passe oublié</string>
     <string name="add_garden">Ajouter un potager</string>
     <string name="navigation_drawer_open">Ouvrir le menu</string>
     <string name="navigation_drawer_close">Fermer le menu</string>
@@ -12,4 +14,9 @@
     <string name="cancel">Annuler</string>
     <string name="next">Suivant</string>
     <string name="ignore">Ignorer</string>
+    <string name="password_reset_sent">Votre nouveau mot de passe a été envoyé par mail</string>
+    <string name="password_reset_conflict">Une demande de mot de passe à déjà été faite ces dernières 24h</string>
+    <string name="password_reset_error">Utilisateur inconnu</string>
+    <string name="password_reset_button">Réinitialiser mot de passe</string>
+    <string name="error">Erreur</string>
 </resources>

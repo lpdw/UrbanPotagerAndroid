@@ -32,6 +32,10 @@ public class UrbanPotagerApi {
         Call<Response> createUser(@Field("username") String username, @Field("email") String email, @Field("plainPassword") String plainPassword);
 
         @FormUrlEncoded
+        @POST("forget-password")
+        Call<Void> forgetPassword(@Field("username") String username);
+
+        @FormUrlEncoded
         @POST("token")
         Call<Token> signIn(@Field("username") String username, @Field("password") String password);
 
@@ -107,6 +111,39 @@ public class UrbanPotagerApi {
 
             @Override
             public void onFailure(Call<Response> call, Throwable t) {
+                callbackWrapper.onFailure(call, t);
+            }
+
+        });
+    }
+
+    public void forgetPassword(final String username, final CallbackWrapper callbackWrapper){
+        Retrofit retro = new Retrofit.Builder()
+                .baseUrl(baseUrl)
+                .addConverterFactory(JacksonConverterFactory.create())
+                .build();
+        API api = retro.create(API.class);
+
+        Call<Void> call = api.forgetPassword(username);
+
+        call.enqueue(new retrofit2.Callback<Void>() {
+
+            @Override
+            public void onResponse(Call<Void> call, retrofit2.Response<Void> response) {
+                if (response.code() == 204) {
+                    callbackWrapper.onResponse("ok");
+                } else if(response.code() == 404) {
+                    callbackWrapper.onResponse("unknown user");
+                } else if(response.code() == 409) {
+                    callbackWrapper.onResponse("conflict");
+                } else {
+                    Throwable t = new Throwable(String.format("HTTP CODE: %d", response.code()));
+                    callbackWrapper.onFailure(call, t);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
                 callbackWrapper.onFailure(call, t);
             }
 

@@ -53,9 +53,7 @@
             <TextView
                 style="@style/wrap_content.text_round"
                 android:background="@drawable/bg_round_orange"
-                android:id="@+id/dashboard_light"
-                android:paddingLeft="8dp"
-                android:drawableLeft="@drawable/ic_emoticon_happy"/>
+                android:id="@+id/dashboard_light" />
             <TextView
                 style="@style/wrap_content"
                 android:text="Light"/>

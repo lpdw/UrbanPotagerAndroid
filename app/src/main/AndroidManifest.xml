@@ -31,6 +31,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".SignUpActivity" android:theme="@style/AppTheme" android:noHistory="true"/>
+        <activity android:name=".ForgetPasswordActivity" android:theme="@style/AppTheme" android:noHistory="true"/>
         <activity android:name=".SettingsActivity" android:theme="@style/AppTheme"
             android:parentActivityName="MainActivity" />
         <activity android:name=".MainActivity"

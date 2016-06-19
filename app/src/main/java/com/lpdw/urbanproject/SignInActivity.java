@@ -33,6 +33,9 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         Button signInButton = (Button) findViewById(R.id.sign_in_button);
         signInButton.setOnClickListener(this);
 
+        TextView forgetPasswordButton = (TextView) findViewById(R.id.sign_in_to_forgotten_password);
+        forgetPasswordButton.setOnClickListener(this);
+
         TextView signInToSignUp = (TextView) findViewById(R.id.sign_in_to_sign_up);
         signInToSignUp.setOnClickListener(this);
     }
@@ -74,6 +77,10 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             case R.id.sign_in_to_sign_up:
                 targetClass = SignUpActivity.class;
+                break;
+            case R.id.sign_in_to_forgotten_password:
+                Log.d("TEST", "TEST");
+                targetClass = ForgetPasswordActivity.class;
                 break;
         }
 

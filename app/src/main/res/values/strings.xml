@@ -2,6 +2,8 @@
     <string name="app_name">UrbanProject</string>
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
+    <string name="no_account">I don\'t have an account</string>
+    <string name="forgotten_password">Forgotten password</string>
     <string name="add_garden">Add garden</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -12,4 +14,9 @@
     <string name="select_garden_location">Select garden location</string>
     <string name="next">Next</string>
     <string name="ignore">Ignore</string>
+    <string name="password_reset_sent">Your new password has been sent</string>
+    <string name="password_reset_conflict">A password reset request has already been performed in the last 24h</string>
+    <string name="password_reset_error">Unknown user</string>
+    <string name="password_reset_button">Reset password</string>
+    <string name="error">Error</string>
 </resources>

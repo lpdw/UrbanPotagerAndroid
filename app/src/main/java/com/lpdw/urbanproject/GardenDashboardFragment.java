@@ -1,6 +1,9 @@
 package com.lpdw.urbanproject;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.lpdw.urbanproject.Api.DataResponse;
 import com.lpdw.urbanproject.Api.UrbanPotagerApi;
 
@@ -29,7 +33,6 @@ public class GardenDashboardFragment extends Fragment {
         getHumidity();
         getLight();
         getWaterLvl();
-
         return fragContainer;
     }
 
@@ -116,12 +119,6 @@ public class GardenDashboardFragment extends Fragment {
     }
     private void setLight(float value){
         TextView light = (TextView)fragContainer.findViewById(R.id.dashboard_light);
-        if(value < 25){
-            light.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_emoticon_sad, 0, 0, 0);
-        } else if(value > 25 && value < 50){
-            light.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_emoticon_neutral, 0, 0, 0);
-        } else {
-            light.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_emoticon_happy, 0, 0, 0);
-        }
+        light.setText(String.valueOf((int)value)+"%");
     }
 }
