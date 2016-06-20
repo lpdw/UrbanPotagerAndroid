@@ -23,4 +23,5 @@
     <string name="disconnect_dialog">Voulez vous vraiment vous déconnecter?</string>
     <string name="yes">Oui</string>
     <string name="no">Non</string>
+    <string name="sign_in_bad_credentials">Erreur identifiants</string>
 </resources>

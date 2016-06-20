@@ -69,7 +69,6 @@ public class MainActivity extends AppCompatActivity
             public void onResponse(Object object) {
                 MyGardens myGardens = new MyGardens((Garden[])object);
                 if (myGardens != null) {
-                    Log.d("MY GARDENS", myGardens.gardens[0].description);
                     myGardens.save();
                 }
             }
@@ -115,6 +114,7 @@ public class MainActivity extends AppCompatActivity
                         public void onClick(DialogInterface dialog, int which) {
                             Me.get().disconnect();
                             Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
+                            finish();
                             startActivity(intent);
                         }
 
@@ -123,9 +123,7 @@ public class MainActivity extends AppCompatActivity
                     .show();
         }
         else if (id == R.id.nav_settings) {
-            //getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new SettingsActivity()).commit();
-            Intent intent = new Intent(this, SettingsActivity.class);
-            startActivity(intent);
+            //Voir les paramètres généraux de l'appli
         } else if (id == R.id.nav_garden1) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new GardenFragment()).commit();
         } else if (id == R.id.nav_garden2) {
