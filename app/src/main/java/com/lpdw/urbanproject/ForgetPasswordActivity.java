@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lpdw.urbanproject.Api.UrbanPotagerApi;
 
@@ -62,15 +63,18 @@ public class ForgetPasswordActivity extends AppCompatActivity implements View.On
             @Override
             public void onResponse(Object object) {
                 String res = (String) object;
-                TextView status = (TextView) findViewById(R.id.forget_password_status);
                 switch (res){
-                    case "ok": status.setText(R.string.password_reset_sent);
+                    case "ok": Toast.makeText(getApplicationContext(), R.string.password_reset_sent, Toast.LENGTH_LONG).show();
+
                         break;
-                    case "unknown user": status.setText(R.string.password_reset_error);
+                    case "unknown user": Toast.makeText(getApplicationContext(), R.string.password_reset_error, Toast.LENGTH_LONG).show();
+
                         break;
-                    case "conflict": status.setText(R.string.password_reset_conflict);
+                    case "conflict": Toast.makeText(getApplicationContext(), R.string.password_reset_conflict, Toast.LENGTH_LONG).show();
+
                         break;
-                    default: status.setText(R.string.error);
+                    default: Toast.makeText(getApplicationContext(), R.string.error, Toast.LENGTH_LONG).show();
+                        ;
                         break;
                 }
             }

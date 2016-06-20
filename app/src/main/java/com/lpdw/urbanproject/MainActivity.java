@@ -123,9 +123,7 @@ public class MainActivity extends AppCompatActivity
                     .show();
         }
         else if (id == R.id.nav_settings) {
-            //getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new SettingsActivity()).commit();
-            Intent intent = new Intent(this, SettingsActivity.class);
-            startActivity(intent);
+            //Voir les paramètres généraux de l'appli
         } else if (id == R.id.nav_garden1) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new GardenFragment()).commit();
         } else if (id == R.id.nav_garden2) {

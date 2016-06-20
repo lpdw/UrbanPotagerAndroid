@@ -8,4 +8,6 @@ import org.w3c.dom.Text;
 public class Token {
     public String token;
     public String refresh_token;
+    public String message;
+    public int code;
 }

@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lpdw.urbanproject.Api.UrbanPotagerApi;
 
@@ -57,19 +58,21 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                     @Override
                     public void onResponse(Object object) {
                         Token token = (Token) object;
-
+                        
                         if (token != null) {
                             me.token = token.token;
                             me.refreshToken = token.refresh_token;
                             me.save();
 
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                         }
                     }
 
                     @Override
                     public void onFailure(Call call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), R.string.sign_in_bad_credentials, Toast.LENGTH_LONG).show();
                         t.printStackTrace();
                     }
                 });
@@ -79,7 +82,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 targetClass = SignUpActivity.class;
                 break;
             case R.id.sign_in_to_forgotten_password:
-                Log.d("TEST", "TEST");
                 targetClass = ForgetPasswordActivity.class;
                 break;
         }
@@ -90,4 +92,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
+    @Override
+    public void onBackPressed() {
+    }
 }
